@@ -108,8 +108,11 @@ const chromePath = isLinux
   ? '/usr/bin/chromium'  // Linux (Kali/Debian)
   : 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'; // Windows
 
+// Session path relative to bot folder
+const sessionPath = isLinux ? './whatsapp-session' : '../whatsapp-session';
+
 const client = new Client({
-  authStrategy: new LocalAuth({ dataPath: '../whatsapp-session' }),
+  authStrategy: new LocalAuth({ dataPath: sessionPath }),
   puppeteer: {
     headless: true,
     executablePath: chromePath,
