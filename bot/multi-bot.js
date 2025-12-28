@@ -13,8 +13,15 @@ const path = require('path');
 const fs = require('fs');
 
 // ========== LOAD CONFIG ==========
-const API_URL = 'http://localhost:5000/api';
-const SOCKET_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:3000/api';
+const SOCKET_URL = 'http://localhost:3000';
+
+// Chrome path detection for Linux vs Windows
+const os = require('os');
+const isLinux = os.platform() === 'linux';
+const CHROME_PATH = isLinux 
+  ? '/usr/bin/chromium' 
+  : 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 
 // Load config dari file
 let botConfig = { bots: [], config: {} };
@@ -251,7 +258,7 @@ function createBot(botConfig) {
     }),
     puppeteer: {
       headless: true,
-      executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+      executablePath: CHROME_PATH,
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu']
     }
   });
