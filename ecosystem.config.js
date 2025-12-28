@@ -25,11 +25,12 @@ module.exports = {
     },
     {
       name: 'kurirta-client',
-      script: 'serve',
-      args: '-s client/build -l 3000',
+      script: 'npx',
+      args: 'serve -s client/build -l 3000',
       instances: 1,
       autorestart: true,
-      watch: false
+      watch: false,
+      interpreter: 'none'
     }
   ]
 };
