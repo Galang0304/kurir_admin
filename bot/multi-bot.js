@@ -391,8 +391,9 @@ function createBot(botConfig) {
       return;
     }
     
-    // Cooldown check  
-    if (!canReply(fullChatId)) {
+    // Cooldown check - SKIP untuk user baru (belum pernah reply)
+    const isNewUser = !userLastReply.has(fullChatId);
+    if (!isNewUser && !canReply(fullChatId)) {
       const remaining = getRemainingCooldown(fullChatId);
       if (!userCooldownNotified.get(fullChatId)) {
         addQueue(fullChatId, `⏳ Tunggu ${remaining} detik lagi sebelum pesan berikutnya ya kak.`);
