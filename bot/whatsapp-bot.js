@@ -9,6 +9,7 @@ const qrcode = require('qrcode-terminal');
 const QRCode = require('qrcode');
 const axios = require('axios');
 const { io } = require('socket.io-client');
+const path = require('path');
 
 // ========== CONFIG ==========
 const API_URL = 'http://localhost:5000/api';
@@ -108,8 +109,8 @@ const chromePath = isLinux
   ? '/usr/bin/chromium'  // Linux (Kali/Debian)
   : 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'; // Windows
 
-// Session path relative to bot folder
-const sessionPath = isLinux ? './whatsapp-session' : '../whatsapp-session';
+// Session path using absolute path
+const sessionPath = path.join(__dirname, 'whatsapp-session');
 
 const client = new Client({
   authStrategy: new LocalAuth({ dataPath: sessionPath }),
