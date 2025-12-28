@@ -9,7 +9,7 @@ module.exports = {
       max_memory_restart: '1G',
       env: {
         NODE_ENV: 'production',
-        PORT: 5000
+        PORT: 3000
       }
     },
     {
@@ -22,15 +22,6 @@ module.exports = {
       env: {
         NODE_ENV: 'production'
       }
-    },
-    {
-      name: 'kurirta-client',
-      script: 'npx',
-      args: 'serve -s client/build -l 3000',
-      instances: 1,
-      autorestart: true,
-      watch: false,
-      interpreter: 'none'
     }
   ]
 };

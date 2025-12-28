@@ -12,8 +12,8 @@ const { io } = require('socket.io-client');
 const path = require('path');
 
 // ========== CONFIG ==========
-const API_URL = 'http://localhost:5000/api';
-const SOCKET_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:3000/api';
+const SOCKET_URL = 'http://localhost:3000';
 
 // ULTRA SAFE ANTI-BAN
 const CONFIG = {
