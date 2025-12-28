@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+client/node_modules/
+
+# Environment
+.env
+
+# WhatsApp sessions - JANGAN di commit!
+bot/.wwebjs_auth/
+bot/.wwebjs_cache/
+bot/session*/
+.wwebjs_auth/
+.wwebjs_cache/
+whatsapp-session/
+whatsapp-sessions/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build
+client/build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,33 @@
+{
+  "bots": [
+    {
+      "id": "bot1",
+      "name": "Bot Utama",
+      "sessionPath": "session-bot1",
+      "enabled": true
+    },
+    {
+      "id": "bot2", 
+      "name": "Bot Cadangan 1",
+      "sessionPath": "session-bot2",
+      "enabled": true
+    },
+    {
+      "id": "bot3",
+      "name": "Bot Cadangan 2", 
+      "sessionPath": "session-bot3",
+      "enabled": false
+    }
+  ],
+  "config": {
+    "minDelay": 3000,
+    "maxDelay": 6000,
+    "typingTime": 2000,
+    "maxPerMin": 8,
+    "maxPerHour": 100,
+    "maxPerDay": 1000,
+    "userCooldown": 60000,
+    "orderCooldown": 30000,
+    "spamBlock": 180000
+  }
+}
