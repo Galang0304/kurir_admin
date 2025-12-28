@@ -102,11 +102,17 @@ socket.on('orderStatusUpdate', async (data) => {
 });
 
 // ========== CLIENT ==========
+// Detect OS and set Chrome path
+const isLinux = process.platform === 'linux';
+const chromePath = isLinux 
+  ? '/usr/bin/chromium'  // Linux (Kali/Debian)
+  : 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'; // Windows
+
 const client = new Client({
   authStrategy: new LocalAuth({ dataPath: '../whatsapp-session' }),
   puppeteer: {
     headless: true,
-    executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    executablePath: chromePath,
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu']
   }
 });
