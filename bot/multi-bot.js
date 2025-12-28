@@ -434,7 +434,10 @@ function createBot(botConfig) {
       try {
         const res = await axios.post(`${API_URL}/orders`, {
           customerPhone: phone,
-          serviceType: serviceType === '1' ? 'Makanan' : 'Ojek'
+          customerName: `Customer ${phone.slice(-4)}`,
+          serviceType: serviceType === '1' ? 'Makanan' : 'Ojek',
+          pickupAddress: 'Konfirmasi via driver',
+          deliveryAddress: 'Konfirmasi via driver'
         });
         
         const orderNumber = res.data.orderNumber || res.data.order?.orderNumber;
