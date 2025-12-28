@@ -14,7 +14,7 @@ module.exports = {
     },
     {
       name: 'kurirta-bot',
-      script: 'bot/whatsapp-bot.js',
+      script: 'bot/multi-bot.js',
       instances: 1,
       autorestart: true,
       watch: false,
