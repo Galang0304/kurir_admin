@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
 import { shiftsAPI, driversAPI } from '../../services/api';
 import { toast } from 'react-toastify';
-import { FiPlus, FiTrash2, FiCalendar, FiClock, FiUser, FiX } from 'react-icons/fi';
+import { FiPlus, FiTrash2, FiCalendar, FiClock, FiUser, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const AdminShifts = () => {
   const [shifts, setShifts] = useState([]);
@@ -87,6 +87,43 @@ const AdminShifts = () => {
     return dates;
   };
 
+  // Navigate to previous week
+  const goToPrevWeek = () => {
+    const current = new Date(selectedDate);
+    current.setDate(current.getDate() - 7);
+    setSelectedDate(current.toISOString().split('T')[0]);
+  };
+
+  // Navigate to next week
+  const goToNextWeek = () => {
+    const current = new Date(selectedDate);
+    current.setDate(current.getDate() + 7);
+    setSelectedDate(current.toISOString().split('T')[0]);
+  };
+
+  // Go to today
+  const goToToday = () => {
+    setSelectedDate(new Date().toISOString().split('T')[0]);
+  };
+
+  // Handle custom date input
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
+
+  // Get month and year label for current week
+  const getWeekLabel = () => {
+    const dates = getWeekDates();
+    const startMonth = dates[0].toLocaleDateString('id-ID', { month: 'short' });
+    const endMonth = dates[6].toLocaleDateString('id-ID', { month: 'short' });
+    const year = dates[0].getFullYear();
+    
+    if (startMonth === endMonth) {
+      return `${startMonth} ${year}`;
+    }
+    return `${startMonth} - ${endMonth} ${year}`;
+  };
+
   const weekDates = getWeekDates();
   const dayNames = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
 
@@ -127,8 +164,29 @@ const AdminShifts = () => {
       {/* Calendar Week View */}
       <div style={styles.calendarCard}>
         <div style={styles.calendarHeader}>
-          <FiCalendar size={20} />
-          <span>Pilih Tanggal</span>
+          <div style={styles.calendarNav}>
+            <button style={styles.navButton} onClick={goToPrevWeek}>
+              <FiChevronLeft size={20} />
+            </button>
+            <div style={styles.calendarTitle}>
+              <FiCalendar size={18} />
+              <span>{getWeekLabel()}</span>
+            </div>
+            <button style={styles.navButton} onClick={goToNextWeek}>
+              <FiChevronRight size={20} />
+            </button>
+          </div>
+          <div style={styles.calendarActions}>
+            <button style={styles.todayButton} onClick={goToToday}>
+              Hari Ini
+            </button>
+            <input
+              type="date"
+              value={selectedDate}
+              onChange={handleDateChange}
+              style={styles.dateInput}
+            />
+          </div>
         </div>
         <div style={styles.weekGrid}>
           {weekDates.map((date, index) => {
@@ -308,11 +366,11 @@ const styles = {
   title: {
     fontSize: 32,
     fontWeight: 700,
-    color: '#1f2937',
+    color: '#FFD700',
     margin: 0,
   },
   subtitle: {
-    color: '#6b7280',
+    color: '#9CA3AF',
     marginTop: 4,
   },
   addButton: {
@@ -320,29 +378,84 @@ const styles = {
     alignItems: 'center',
     gap: 8,
     padding: '12px 24px',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    color: 'white',
+    background: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
+    color: '#0D0D0D',
     border: 'none',
     borderRadius: 12,
     fontSize: 15,
     fontWeight: 600,
     cursor: 'pointer',
-    boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)',
+    boxShadow: '0 4px 15px rgba(255, 215, 0, 0.4)',
   },
   calendarCard: {
-    background: 'white',
+    background: '#1A1A1A',
     borderRadius: 20,
     padding: 24,
     marginBottom: 24,
-    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+    border: '1px solid rgba(255, 215, 0, 0.1)',
   },
   calendarHeader: {
     display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+    flexWrap: 'wrap',
+    gap: 16,
+  },
+  calendarNav: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 12,
+  },
+  navButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    border: '1px solid rgba(255, 215, 0, 0.2)',
+    background: '#252525',
+    color: '#FFD700',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.2s',
+  },
+  calendarTitle: {
+    display: 'flex',
     alignItems: 'center',
     gap: 8,
-    marginBottom: 20,
-    color: '#6b7280',
+    color: '#FFD700',
     fontWeight: 600,
+    fontSize: 16,
+    minWidth: 150,
+    justifyContent: 'center',
+  },
+  calendarActions: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 12,
+  },
+  todayButton: {
+    padding: '10px 16px',
+    borderRadius: 10,
+    border: '1px solid rgba(255, 215, 0, 0.3)',
+    background: 'transparent',
+    color: '#FFD700',
+    cursor: 'pointer',
+    fontWeight: 600,
+    fontSize: 14,
+    transition: 'all 0.2s',
+  },
+  dateInput: {
+    padding: '10px 16px',
+    borderRadius: 10,
+    border: '1px solid rgba(255, 215, 0, 0.2)',
+    background: '#252525',
+    color: '#FFFFFF',
+    cursor: 'pointer',
+    fontSize: 14,
+    outline: 'none',
   },
   weekGrid: {
     display: 'grid',
@@ -354,19 +467,20 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     padding: '16px 8px',
-    border: '2px solid #e5e7eb',
+    border: '2px solid rgba(255, 215, 0, 0.15)',
     borderRadius: 16,
-    background: 'white',
+    background: '#252525',
     cursor: 'pointer',
     transition: 'all 0.2s',
+    color: '#E5E7EB',
   },
   dayButtonActive: {
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
     borderColor: 'transparent',
-    color: 'white',
+    color: '#0D0D0D',
   },
   dayButtonToday: {
-    borderColor: '#667eea',
+    borderColor: '#FFD700',
   },
   dayName: {
     fontSize: 12,
@@ -379,10 +493,11 @@ const styles = {
     marginTop: 4,
   },
   shiftSection: {
-    background: 'white',
+    background: '#1A1A1A',
     borderRadius: 20,
     padding: 24,
-    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+    border: '1px solid rgba(255, 215, 0, 0.1)',
   },
   shiftHeader: {
     marginBottom: 24,
@@ -390,12 +505,13 @@ const styles = {
   sectionTitle: {
     fontSize: 18,
     fontWeight: 600,
-    color: '#1f2937',
+    color: '#FFFFFF',
     margin: 0,
   },
   emptyState: {
     textAlign: 'center',
     padding: '48px 20px',
+    color: '#9CA3AF',
   },
   emptyAddButton: {
     display: 'inline-flex',
@@ -403,10 +519,10 @@ const styles = {
     gap: 8,
     marginTop: 16,
     padding: '12px 24px',
-    background: '#f3f4f6',
-    border: 'none',
+    background: '#252525',
+    border: '1px solid rgba(255, 215, 0, 0.2)',
     borderRadius: 12,
-    color: '#6b7280',
+    color: '#FFD700',
     fontSize: 14,
     fontWeight: 600,
     cursor: 'pointer',
@@ -417,9 +533,10 @@ const styles = {
     gap: 16,
   },
   shiftCard: {
-    border: '1px solid #e5e7eb',
+    border: '1px solid rgba(255, 215, 0, 0.1)',
     borderRadius: 16,
     overflow: 'hidden',
+    background: '#252525',
   },
   shiftBadge: {
     display: 'flex',
@@ -445,8 +562,8 @@ const styles = {
     width: 44,
     height: 44,
     borderRadius: 12,
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    color: 'white',
+    background: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
+    color: '#0D0D0D',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -455,7 +572,7 @@ const styles = {
   },
   driverName: {
     fontWeight: 600,
-    color: '#1f2937',
+    color: '#FFFFFF',
   },
   shiftTime: {
     fontSize: 13,
@@ -466,7 +583,7 @@ const styles = {
     height: 40,
     borderRadius: 10,
     border: 'none',
-    background: '#fef2f2',
+    background: 'rgba(239, 68, 68, 0.15)',
     color: '#ef4444',
     cursor: 'pointer',
     display: 'flex',
@@ -476,7 +593,7 @@ const styles = {
   modalOverlay: {
     position: 'fixed',
     inset: 0,
-    background: 'rgba(0,0,0,0.5)',
+    background: 'rgba(0,0,0,0.8)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -484,22 +601,24 @@ const styles = {
     padding: 20,
   },
   modal: {
-    background: 'white',
+    background: '#1A1A1A',
     borderRadius: 20,
     width: '100%',
     maxWidth: 480,
+    border: '1px solid rgba(255, 215, 0, 0.2)',
   },
   modalHeader: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 24,
-    borderBottom: '1px solid #f3f4f6',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
   },
   modalTitle: {
     fontSize: 20,
     fontWeight: 700,
     margin: 0,
+    color: '#FFD700',
   },
   closeButton: {
     background: 'transparent',
@@ -517,16 +636,18 @@ const styles = {
     gap: 8,
     fontSize: 14,
     fontWeight: 600,
-    color: '#374151',
+    color: '#E5E7EB',
     marginBottom: 10,
   },
   select: {
     width: '100%',
     padding: '14px 16px',
-    border: '2px solid #e5e7eb',
+    border: '2px solid rgba(255, 215, 0, 0.2)',
     borderRadius: 12,
     fontSize: 15,
     outline: 'none',
+    background: '#252525',
+    color: '#FFFFFF',
   },
   shiftOptions: {
     display: 'grid',
@@ -535,13 +656,14 @@ const styles = {
   },
   shiftOption: {
     padding: 16,
-    border: '2px solid #e5e7eb',
+    border: '2px solid rgba(255, 215, 0, 0.15)',
     borderRadius: 12,
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
     gap: 12,
     transition: 'all 0.2s',
+    background: '#252525',
   },
   shiftOptionDot: {
     width: 12,
@@ -550,7 +672,7 @@ const styles = {
   },
   shiftOptionLabel: {
     fontWeight: 600,
-    color: '#1f2937',
+    color: '#FFFFFF',
     fontSize: 14,
   },
   shiftOptionTime: {
@@ -565,9 +687,9 @@ const styles = {
   cancelButton: {
     flex: 1,
     padding: '14px 24px',
-    background: '#f3f4f6',
-    color: '#6b7280',
-    border: 'none',
+    background: '#252525',
+    color: '#9CA3AF',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
     borderRadius: 12,
     fontSize: 15,
     fontWeight: 600,
@@ -576,8 +698,8 @@ const styles = {
   submitButton: {
     flex: 1,
     padding: '14px 24px',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    color: 'white',
+    background: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
+    color: '#0D0D0D',
     border: 'none',
     borderRadius: 12,
     fontSize: 15,
@@ -593,8 +715,8 @@ const styles = {
   spinner: {
     width: 40,
     height: 40,
-    border: '4px solid #e5e7eb',
-    borderTopColor: '#667eea',
+    border: '4px solid rgba(255, 215, 0, 0.2)',
+    borderTopColor: '#FFD700',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite',
   },

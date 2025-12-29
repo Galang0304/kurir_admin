@@ -1,4 +1,22 @@
-/* KurirTA Custom Styles */
+/* KurirTA Custom Styles - Yellow Black Theme */
+
+:root {
+  --primary-yellow: #FFD700;
+  --primary-yellow-dark: #E6C200;
+  --primary-yellow-light: #FFF4B8;
+  --primary-black: #1A1A1A;
+  --primary-black-light: #2D2D2D;
+  --primary-black-dark: #0D0D0D;
+  --accent-gold: #DAA520;
+  --text-white: #FFFFFF;
+  --text-gray: #9CA3AF;
+  --bg-dark: #121212;
+  --bg-card: #1E1E1E;
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --info: #3B82F6;
+}
 
 * {
   margin: 0;
@@ -8,7 +26,8 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: #f0f2f5;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -19,6 +38,11 @@ body {
   to { transform: rotate(360deg); }
 }
 
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -26,28 +50,40 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--primary-black);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--accent-gold) 100%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  background: var(--primary-yellow-dark);
 }
 
 /* Selection */
 ::selection {
-  background: rgba(102, 126, 234, 0.3);
+  background: rgba(255, 215, 0, 0.3);
+  color: var(--text-white);
 }
 
 /* Toast customization */
 .Toastify__toast {
   border-radius: 12px !important;
   font-family: inherit !important;
+  background: var(--bg-card) !important;
+  color: var(--text-white) !important;
+  border: 1px solid var(--primary-yellow) !important;
+}
+
+.Toastify__toast--success {
+  border-color: var(--success) !important;
+}
+
+.Toastify__toast--error {
+  border-color: var(--danger) !important;
 }
 
 /* Responsive adjustments */

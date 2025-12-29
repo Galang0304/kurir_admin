@@ -83,29 +83,29 @@ const AdminDashboard = () => {
       icon: FiPackage, 
       label: 'Total Pesanan', 
       value: stats.totalOrders, 
-      gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      shadowColor: 'rgba(102, 126, 234, 0.4)'
+      gradient: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
+      shadowColor: 'rgba(255, 215, 0, 0.4)'
     },
     { 
       icon: FiClock, 
       label: 'Menunggu', 
       value: stats.pendingOrders, 
-      gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-      shadowColor: 'rgba(245, 87, 108, 0.4)'
+      gradient: 'linear-gradient(135deg, #FFA500 0%, #FF8C00 100%)',
+      shadowColor: 'rgba(255, 165, 0, 0.4)'
     },
     { 
       icon: FiCheckCircle, 
       label: 'Selesai Hari Ini', 
       value: stats.completedToday, 
-      gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-      shadowColor: 'rgba(79, 172, 254, 0.4)'
+      gradient: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+      shadowColor: 'rgba(16, 185, 129, 0.4)'
     },
     { 
       icon: FiUsers, 
       label: 'Driver Aktif', 
       value: stats.activeDrivers, 
-      gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-      shadowColor: 'rgba(67, 233, 123, 0.4)'
+      gradient: 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)',
+      shadowColor: 'rgba(59, 130, 246, 0.4)'
     },
   ];
 
@@ -367,11 +367,11 @@ const styles = {
   title: {
     fontSize: 32,
     fontWeight: 700,
-    color: '#1f2937',
+    color: '#FFD700',
     margin: 0,
   },
   subtitle: {
-    color: '#6b7280',
+    color: '#9CA3AF',
     marginTop: 8,
     fontSize: 16,
   },
@@ -384,7 +384,7 @@ const styles = {
   statCard: {
     borderRadius: 20,
     padding: 28,
-    color: 'white',
+    color: '#0D0D0D',
     position: 'relative',
     overflow: 'hidden',
   },
@@ -392,7 +392,7 @@ const styles = {
     width: 56,
     height: 56,
     borderRadius: 16,
-    background: 'rgba(255,255,255,0.2)',
+    background: 'rgba(0,0,0,0.15)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -405,17 +405,17 @@ const styles = {
   },
   statLabel: {
     fontSize: 15,
-    opacity: 0.9,
+    opacity: 0.8,
     fontWeight: 500,
   },
   // WhatsApp Card Styles
   whatsappCard: {
-    background: 'white',
+    background: '#1A1A1A',
     borderRadius: 20,
     padding: 28,
-    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
     marginBottom: 32,
-    border: '1px solid #E5E7EB',
+    border: '1px solid rgba(255, 215, 0, 0.1)',
   },
   whatsappHeader: {
     display: 'flex',
@@ -433,7 +433,7 @@ const styles = {
   whatsappTitle: {
     fontSize: 20,
     fontWeight: 600,
-    color: '#1f2937',
+    color: '#FFFFFF',
     margin: 0,
   },
   statusBadge: {
@@ -450,8 +450,9 @@ const styles = {
     alignItems: 'center',
     gap: 20,
     padding: 24,
-    background: 'linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%)',
+    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%)',
     borderRadius: 16,
+    border: '1px solid rgba(16, 185, 129, 0.3)',
   },
   connectedIcon: {
     fontSize: 48,
@@ -462,35 +463,35 @@ const styles = {
   connectedTitle: {
     fontSize: 18,
     fontWeight: 700,
-    color: '#065F46',
+    color: '#10B981',
     margin: '0 0 8px 0',
   },
   connectedPhone: {
     fontSize: 16,
-    color: '#047857',
+    color: '#34D399',
     margin: '4px 0',
     fontWeight: 600,
   },
   connectedName: {
     fontSize: 14,
-    color: '#059669',
+    color: '#6EE7B7',
     margin: '4px 0',
   },
   connectedHint: {
     fontSize: 13,
-    color: '#10B981',
+    color: '#A7F3D0',
     margin: '8px 0 0 0',
   },
   qrContainer: {
     textAlign: 'center',
     padding: 24,
-    background: '#F9FAFB',
+    background: '#252525',
     borderRadius: 16,
   },
   qrTitle: {
     fontSize: 16,
     fontWeight: 600,
-    color: '#374151',
+    color: '#FFFFFF',
     margin: '0 0 20px 0',
   },
   qrWrapper: {
@@ -498,7 +499,7 @@ const styles = {
     padding: 16,
     background: 'white',
     borderRadius: 16,
-    boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
   },
   qrImage: {
     width: 256,
@@ -507,21 +508,22 @@ const styles = {
   },
   qrHint: {
     fontSize: 13,
-    color: '#6B7280',
+    color: '#9CA3AF',
     margin: '20px 0 0 0',
     lineHeight: 1.6,
   },
   waitingContainer: {
     textAlign: 'center',
     padding: 40,
-    background: '#FEF3C7',
+    background: 'rgba(255, 215, 0, 0.1)',
     borderRadius: 16,
+    border: '1px solid rgba(255, 215, 0, 0.2)',
   },
   spinnerSmall: {
     width: 32,
     height: 32,
-    border: '3px solid #FCD34D',
-    borderTopColor: '#F59E0B',
+    border: '3px solid rgba(255, 215, 0, 0.3)',
+    borderTopColor: '#FFD700',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite',
     margin: '0 auto 16px',
@@ -529,19 +531,20 @@ const styles = {
   waitingText: {
     fontSize: 16,
     fontWeight: 600,
-    color: '#92400E',
+    color: '#FFD700',
     margin: '0 0 8px 0',
   },
   waitingHint: {
     fontSize: 13,
-    color: '#B45309',
+    color: '#DAA520',
     margin: 0,
   },
   card: {
-    background: 'white',
+    background: '#1A1A1A',
     borderRadius: 20,
     padding: 28,
-    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+    border: '1px solid rgba(255, 215, 0, 0.1)',
   },
   cardHeader: {
     display: 'flex',
@@ -552,14 +555,14 @@ const styles = {
   cardTitle: {
     fontSize: 20,
     fontWeight: 600,
-    color: '#1f2937',
+    color: '#FFFFFF',
     margin: 0,
   },
   viewAllLink: {
     display: 'flex',
     alignItems: 'center',
     gap: 6,
-    color: '#667eea',
+    color: '#FFD700',
     textDecoration: 'none',
     fontWeight: 500,
     fontSize: 14,
@@ -578,23 +581,24 @@ const styles = {
   th: {
     textAlign: 'left',
     padding: '14px 16px',
-    borderBottom: '2px solid #e5e7eb',
-    color: '#6b7280',
+    borderBottom: '2px solid rgba(255, 215, 0, 0.2)',
+    color: '#FFD700',
     fontSize: 13,
     fontWeight: 600,
     textTransform: 'uppercase',
     letterSpacing: '0.5px',
   },
   tr: {
-    borderBottom: '1px solid #f3f4f6',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
   },
   td: {
     padding: '16px',
     fontSize: 14,
+    color: '#E5E7EB',
   },
   orderNumber: {
     fontWeight: 600,
-    color: '#667eea',
+    color: '#FFD700',
   },
   customerInfo: {
     display: 'flex',
@@ -602,14 +606,14 @@ const styles = {
   },
   customerName: {
     fontWeight: 500,
-    color: '#1f2937',
+    color: '#FFFFFF',
   },
   customerPhone: {
     fontSize: 13,
     color: '#9ca3af',
   },
   timeText: {
-    color: '#6b7280',
+    color: '#9CA3AF',
     fontSize: 13,
   },
   loadingContainer: {
@@ -618,32 +622,33 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 400,
-    color: '#6b7280',
+    color: '#9CA3AF',
   },
   spinner: {
     width: 40,
     height: 40,
-    border: '4px solid #e5e7eb',
-    borderTopColor: '#667eea',
+    border: '4px solid rgba(255, 215, 0, 0.2)',
+    borderTopColor: '#FFD700',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite',
     marginBottom: 16,
   },
   // Multi-Bot Styles
   multiBotCard: {
-    background: 'white',
+    background: '#1A1A1A',
     borderRadius: 20,
     padding: 28,
     marginBottom: 24,
-    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+    border: '1px solid rgba(255, 215, 0, 0.1)',
   },
   botCountBadge: {
     padding: '8px 16px',
     borderRadius: 20,
     fontSize: 13,
     fontWeight: 600,
-    background: '#EEF2FF',
-    color: '#4F46E5',
+    background: 'rgba(255, 215, 0, 0.15)',
+    color: '#FFD700',
   },
   botsGrid: {
     display: 'grid',
@@ -652,10 +657,10 @@ const styles = {
     marginTop: 20,
   },
   botCard: {
-    border: '1px solid #E5E7EB',
+    border: '1px solid rgba(255, 215, 0, 0.15)',
     borderRadius: 16,
     padding: 16,
-    background: '#FAFAFA',
+    background: '#252525',
   },
   botHeader: {
     display: 'flex',
@@ -668,7 +673,7 @@ const styles = {
     alignItems: 'center',
     fontSize: 15,
     fontWeight: 600,
-    color: '#1F2937',
+    color: '#FFFFFF',
   },
   botStatusBadge: {
     padding: '4px 10px',
@@ -681,19 +686,19 @@ const styles = {
   },
   botPhone: {
     fontSize: 14,
-    color: '#374151',
+    color: '#E5E7EB',
     margin: '0 0 6px 0',
     fontWeight: 500,
   },
   botStats: {
     fontSize: 13,
-    color: '#6B7280',
+    color: '#9CA3AF',
     margin: 0,
   },
   botQrContainer: {
     textAlign: 'center',
     padding: 12,
-    background: 'white',
+    background: '#1A1A1A',
     borderRadius: 12,
   },
   botQrImage: {
@@ -705,7 +710,7 @@ const styles = {
   },
   botQrHint: {
     fontSize: 12,
-    color: '#6B7280',
+    color: '#9CA3AF',
     margin: '10px 0 0 0',
   },
   botOffline: {

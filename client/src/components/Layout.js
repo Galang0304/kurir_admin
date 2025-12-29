@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { 
@@ -10,7 +10,15 @@ const Layout = ({ children }) => {
   const { user, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const [sidebarOpen, setSidebarOpen] = React.useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -21,16 +29,61 @@ const Layout = ({ children }) => {
     { path: '/admin', icon: FiHome, label: 'Dashboard' },
     { path: '/admin/orders', icon: FiPackage, label: 'Pesanan' },
     { path: '/admin/drivers', icon: FiUsers, label: 'Driver' },
-    { path: '/admin/shifts', icon: FiCalendar, label: 'Jadwal Piket' },
+    { path: '/admin/shifts', icon: FiCalendar, label: 'Jadwal' },
   ];
 
   const driverMenus = [
     { path: '/driver', icon: FiHome, label: 'Dashboard' },
-    { path: '/driver/orders', icon: FiPackage, label: 'Pesanan Saya' },
+    { path: '/driver/orders', icon: FiPackage, label: 'Pesanan' },
   ];
 
   const menus = user?.role === 'admin' ? adminMenus : driverMenus;
 
+  // Mobile Bottom Navigation
+  if (isMobile) {
+    return (
+      <div style={mobileStyles.container}>
+        {/* Mobile Header */}
+        <div style={mobileStyles.header}>
+          <div style={mobileStyles.headerContent}>
+            <FiTruck size={24} color="#FFD700" />
+            <span style={mobileStyles.headerTitle}>KurirTA</span>
+          </div>
+          <button onClick={handleLogout} style={mobileStyles.logoutBtn}>
+            <FiLogOut size={20} />
+          </button>
+        </div>
+
+        {/* Main Content */}
+        <main style={mobileStyles.main}>
+          {children}
+        </main>
+
+        {/* Bottom Navigation */}
+        <nav style={mobileStyles.bottomNav}>
+          {menus.map((menu) => {
+            const isActive = location.pathname === menu.path;
+            const Icon = menu.icon;
+            return (
+              <Link
+                key={menu.path}
+                to={menu.path}
+                style={{
+                  ...mobileStyles.navItem,
+                  ...(isActive ? mobileStyles.navItemActive : {})
+                }}
+              >
+                <Icon size={22} />
+                <span style={mobileStyles.navLabel}>{menu.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+    );
+  }
+
+  // Desktop Layout
   return (
     <div style={styles.container}>
       {/* Mobile Header */}
@@ -114,30 +167,20 @@ const styles = {
   container: {
     display: 'flex',
     minHeight: '100vh',
-    background: '#f0f2f5',
+    background: '#121212',
   },
   mobileHeader: {
     display: 'none',
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 60,
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    alignItems: 'center',
-    padding: '0 16px',
-    zIndex: 1000,
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
   },
   menuBtn: {
     background: 'transparent',
     border: 'none',
-    color: 'white',
+    color: '#FFD700',
     cursor: 'pointer',
     padding: 8,
   },
   mobileTitle: {
-    color: 'white',
+    color: '#FFD700',
     fontSize: 20,
     fontWeight: 700,
     display: 'flex',
@@ -146,7 +189,7 @@ const styles = {
   },
   sidebar: {
     width: 280,
-    background: 'linear-gradient(180deg, #1a1a2e 0%, #16213e 100%)',
+    background: 'linear-gradient(180deg, #0D0D0D 0%, #1A1A1A 100%)',
     display: 'flex',
     flexDirection: 'column',
     position: 'fixed',
@@ -154,7 +197,7 @@ const styles = {
     left: 0,
     bottom: 0,
     zIndex: 1001,
-    transition: 'transform 0.3s ease',
+    borderRight: '1px solid rgba(255, 215, 0, 0.1)',
   },
   sidebarOpen: {},
   sidebarHeader: {
@@ -163,19 +206,19 @@ const styles = {
     alignItems: 'center',
     gap: 16,
     color: 'white',
-    borderBottom: '1px solid rgba(255,255,255,0.1)',
+    borderBottom: '1px solid rgba(255, 215, 0, 0.1)',
   },
   logo: {
     fontSize: 24,
     fontWeight: 700,
     margin: 0,
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
   },
   roleTag: {
     fontSize: 12,
-    color: 'rgba(255,255,255,0.6)',
+    color: '#9CA3AF',
   },
   nav: {
     flex: 1,
@@ -189,7 +232,7 @@ const styles = {
     alignItems: 'center',
     gap: 12,
     padding: '14px 16px',
-    color: 'rgba(255,255,255,0.7)',
+    color: '#9CA3AF',
     textDecoration: 'none',
     borderRadius: 12,
     transition: 'all 0.2s',
@@ -197,13 +240,13 @@ const styles = {
     fontWeight: 500,
   },
   navLinkActive: {
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    color: 'white',
-    boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)',
+    background: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
+    color: '#0D0D0D',
+    boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)',
   },
   sidebarFooter: {
     padding: 20,
-    borderTop: '1px solid rgba(255,255,255,0.1)',
+    borderTop: '1px solid rgba(255, 215, 0, 0.1)',
   },
   userInfo: {
     display: 'flex',
@@ -215,11 +258,11 @@ const styles = {
     width: 45,
     height: 45,
     borderRadius: '50%',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: 'white',
+    color: '#0D0D0D',
     fontSize: 18,
     fontWeight: 600,
   },
@@ -229,7 +272,7 @@ const styles = {
     fontSize: 14,
   },
   userEmail: {
-    color: 'rgba(255,255,255,0.5)',
+    color: '#9CA3AF',
     fontSize: 12,
   },
   logoutBtn: {
@@ -251,7 +294,7 @@ const styles = {
   overlay: {
     position: 'fixed',
     inset: 0,
-    background: 'rgba(0,0,0,0.5)',
+    background: 'rgba(0,0,0,0.7)',
     zIndex: 1000,
     display: 'none',
   },
@@ -260,17 +303,89 @@ const styles = {
     marginLeft: 280,
     padding: 32,
     minHeight: '100vh',
+    background: '#121212',
   },
 };
 
-// Add responsive styles via media query workaround
-if (typeof window !== 'undefined' && window.innerWidth <= 768) {
-  styles.mobileHeader.display = 'flex';
-  styles.sidebar.transform = 'translateX(-100%)';
-  styles.sidebarOpen.transform = 'translateX(0)';
-  styles.overlay.display = 'block';
-  styles.main.marginLeft = 0;
-  styles.main.paddingTop = 76;
-}
+// Mobile styles
+const mobileStyles = {
+  container: {
+    minHeight: '100vh',
+    background: '#121212',
+    paddingBottom: 80,
+  },
+  header: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 60,
+    background: 'linear-gradient(180deg, #0D0D0D 0%, #1A1A1A 100%)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '0 16px',
+    zIndex: 1000,
+    borderBottom: '2px solid #FFD700',
+  },
+  headerContent: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+  },
+  headerTitle: {
+    color: '#FFD700',
+    fontSize: 20,
+    fontWeight: 700,
+  },
+  logoutBtn: {
+    background: 'rgba(239, 68, 68, 0.2)',
+    border: '1px solid rgba(239, 68, 68, 0.4)',
+    color: '#EF4444',
+    borderRadius: 10,
+    padding: '8px 12px',
+    cursor: 'pointer',
+  },
+  main: {
+    paddingTop: 76,
+    padding: '76px 16px 16px',
+    minHeight: 'calc(100vh - 80px)',
+  },
+  bottomNav: {
+    position: 'fixed',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 70,
+    background: 'linear-gradient(180deg, #1A1A1A 0%, #0D0D0D 100%)',
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderTop: '2px solid #FFD700',
+    zIndex: 9999,
+    paddingBottom: 'env(safe-area-inset-bottom)',
+  },
+  navItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#9CA3AF',
+    textDecoration: 'none',
+    padding: '8px 16px',
+    borderRadius: 12,
+    transition: 'all 0.2s',
+    minWidth: 60,
+  },
+  navItemActive: {
+    color: '#FFD700',
+    background: 'rgba(255, 215, 0, 0.15)',
+  },
+  navLabel: {
+    fontSize: 11,
+    marginTop: 4,
+    fontWeight: 500,
+  },
+};
 
 export default Layout;

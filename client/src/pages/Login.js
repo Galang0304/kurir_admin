@@ -10,13 +10,13 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: 'linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #312e81 100%)',
+    background: 'linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 50%, #2D2D2D 100%)',
     padding: '1rem'
   },
   card: {
-    background: 'white',
-    borderRadius: '1rem',
-    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+    background: '#1E1E1E',
+    borderRadius: '1.5rem',
+    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 215, 0, 0.1)',
     padding: '2rem',
     width: '100%',
     maxWidth: '420px'
@@ -29,55 +29,60 @@ const styles = {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '64px',
-    height: '64px',
-    background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
+    width: '72px',
+    height: '72px',
+    background: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
     borderRadius: '50%',
-    marginBottom: '1rem'
+    marginBottom: '1rem',
+    boxShadow: '0 8px 30px rgba(255, 215, 0, 0.3)'
   },
   title: {
-    fontSize: '1.75rem',
+    fontSize: '2rem',
     fontWeight: '700',
-    color: '#1f2937',
+    background: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
     margin: 0
   },
   subtitle: {
-    color: '#6b7280',
-    marginTop: '0.25rem',
+    color: '#9CA3AF',
+    marginTop: '0.5rem',
     fontSize: '0.875rem'
   },
   toggleContainer: {
     display: 'flex',
-    background: '#f3f4f6',
-    borderRadius: '0.5rem',
+    background: '#0D0D0D',
+    borderRadius: '0.75rem',
     padding: '4px',
-    marginBottom: '1.5rem'
+    marginBottom: '1.5rem',
+    border: '1px solid rgba(255, 215, 0, 0.1)'
   },
   toggleBtn: {
     flex: 1,
-    padding: '0.625rem',
-    borderRadius: '0.375rem',
+    padding: '0.75rem',
+    borderRadius: '0.5rem',
     border: 'none',
     fontSize: '0.875rem',
-    fontWeight: '500',
+    fontWeight: '600',
     cursor: 'pointer',
-    transition: 'all 0.2s'
+    transition: 'all 0.3s'
   },
   toggleActive: {
-    background: 'white',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-    color: '#4f46e5'
+    background: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
+    color: '#0D0D0D',
+    boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)'
   },
   toggleInactive: {
     background: 'transparent',
-    color: '#6b7280'
+    color: '#9CA3AF'
   },
   formGroup: {
     marginBottom: '1rem'
   },
   label: {
     display: 'block',
-    color: '#374151',
+    color: '#E5E7EB',
     fontSize: '0.875rem',
     fontWeight: '500',
     marginBottom: '0.5rem'
@@ -87,44 +92,48 @@ const styles = {
   },
   inputIcon: {
     position: 'absolute',
-    left: '12px',
+    left: '14px',
     top: '50%',
     transform: 'translateY(-50%)',
-    color: '#9ca3af',
+    color: '#FFD700',
     fontSize: '1.125rem'
   },
   input: {
     width: '100%',
-    padding: '0.75rem 0.75rem 0.75rem 2.5rem',
-    border: '1px solid #d1d5db',
-    borderRadius: '0.5rem',
+    padding: '0.875rem 0.875rem 0.875rem 2.75rem',
+    background: '#0D0D0D',
+    border: '1px solid rgba(255, 215, 0, 0.2)',
+    borderRadius: '0.75rem',
     fontSize: '0.875rem',
-    transition: 'border-color 0.2s, box-shadow 0.2s',
+    color: '#FFFFFF',
+    transition: 'all 0.2s',
     outline: 'none',
     boxSizing: 'border-box'
   },
   select: {
     width: '100%',
-    padding: '0.75rem',
-    border: '1px solid #d1d5db',
-    borderRadius: '0.5rem',
+    padding: '0.875rem',
+    background: '#0D0D0D',
+    border: '1px solid rgba(255, 215, 0, 0.2)',
+    borderRadius: '0.75rem',
     fontSize: '0.875rem',
+    color: '#FFFFFF',
     outline: 'none',
-    boxSizing: 'border-box',
-    background: 'white'
+    boxSizing: 'border-box'
   },
   submitBtn: {
     width: '100%',
-    padding: '0.875rem',
-    background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
-    color: 'white',
+    padding: '1rem',
+    background: 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
+    color: '#0D0D0D',
     border: 'none',
-    borderRadius: '0.5rem',
+    borderRadius: '0.75rem',
     fontSize: '1rem',
-    fontWeight: '600',
+    fontWeight: '700',
     cursor: 'pointer',
-    transition: 'transform 0.2s, box-shadow 0.2s',
-    marginTop: '0.5rem'
+    transition: 'all 0.3s',
+    marginTop: '0.5rem',
+    boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)'
   },
   submitBtnDisabled: {
     opacity: 0.7,
@@ -133,24 +142,25 @@ const styles = {
   demoBox: {
     marginTop: '1.5rem',
     padding: '1rem',
-    background: '#f9fafb',
-    borderRadius: '0.5rem',
-    border: '1px solid #e5e7eb'
+    background: '#0D0D0D',
+    borderRadius: '0.75rem',
+    border: '1px solid rgba(255, 215, 0, 0.2)'
   },
   demoTitle: {
     fontSize: '0.75rem',
     fontWeight: '600',
-    color: '#4b5563',
+    color: '#FFD700',
     marginBottom: '0.5rem'
   },
   demoText: {
     fontSize: '0.75rem',
-    color: '#6b7280',
+    color: '#9CA3AF',
     margin: '0.25rem 0'
   },
   demoCode: {
-    background: '#e5e7eb',
-    padding: '0.125rem 0.375rem',
+    background: 'rgba(255, 215, 0, 0.2)',
+    color: '#FFD700',
+    padding: '0.125rem 0.5rem',
     borderRadius: '0.25rem',
     fontFamily: 'monospace'
   }
@@ -206,7 +216,7 @@ const Login = () => {
         {/* Logo */}
         <div style={styles.logoContainer}>
           <div style={styles.logoIcon}>
-            <FiTruck style={{ color: 'white', fontSize: '1.75rem' }} />
+            <FiTruck style={{ color: '#0D0D0D', fontSize: '2rem' }} />
           </div>
           <h1 style={styles.title}>KurirTA</h1>
           <p style={styles.subtitle}>Sistem Manajemen Driver</p>

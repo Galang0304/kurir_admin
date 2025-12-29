@@ -98,12 +98,12 @@ const DriverDashboard = () => {
     greetingTitle: {
       fontSize: '28px',
       fontWeight: '700',
-      color: '#1F2937',
+      color: '#FFD700',
       marginBottom: '4px',
     },
     greetingSubtitle: {
       fontSize: '16px',
-      color: '#6B7280',
+      color: '#9CA3AF',
     },
     statusCard: {
       background: isOnDuty 
@@ -112,7 +112,7 @@ const DriverDashboard = () => {
       borderRadius: '20px',
       padding: '28px',
       marginBottom: '24px',
-      boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)',
+      boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -161,11 +161,11 @@ const DriverDashboard = () => {
       marginBottom: '24px',
     },
     statCard: {
-      background: 'white',
+      background: '#1A1A1A',
       borderRadius: '16px',
       padding: '24px',
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
-      border: '1px solid #F3F4F6',
+      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+      border: '1px solid rgba(255, 215, 0, 0.1)',
       transition: 'transform 0.2s ease, box-shadow 0.2s ease',
     },
     statHeader: {
@@ -186,19 +186,19 @@ const DriverDashboard = () => {
     statValue: {
       fontSize: '36px',
       fontWeight: '700',
-      color: '#1F2937',
+      color: '#FFD700',
     },
     statLabel: {
       fontSize: '14px',
-      color: '#6B7280',
+      color: '#9CA3AF',
       marginTop: '4px',
     },
     ordersSection: {
-      background: 'white',
+      background: '#1A1A1A',
       borderRadius: '20px',
       padding: '24px',
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
-      border: '1px solid #F3F4F6',
+      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+      border: '1px solid rgba(255, 215, 0, 0.1)',
     },
     sectionHeader: {
       display: 'flex',
@@ -209,19 +209,19 @@ const DriverDashboard = () => {
     sectionTitle: {
       fontSize: '18px',
       fontWeight: '700',
-      color: '#1F2937',
+      color: '#FFFFFF',
     },
     viewAllLink: {
       display: 'flex',
       alignItems: 'center',
       gap: '6px',
-      color: '#6366F1',
+      color: '#FFD700',
       fontSize: '14px',
       fontWeight: '600',
       textDecoration: 'none',
       padding: '8px 16px',
       borderRadius: '8px',
-      background: '#EEF2FF',
+      background: 'rgba(255, 215, 0, 0.15)',
       transition: 'all 0.2s ease',
     },
     emptyState: {
@@ -235,11 +235,11 @@ const DriverDashboard = () => {
       opacity: 0.5,
     },
     orderCard: {
-      background: '#F9FAFB',
+      background: '#252525',
       borderRadius: '12px',
       padding: '16px',
       marginBottom: '12px',
-      border: '1px solid #E5E7EB',
+      border: '1px solid rgba(255, 215, 0, 0.1)',
       transition: 'all 0.2s ease',
     },
     orderHeader: {
@@ -251,7 +251,7 @@ const DriverDashboard = () => {
     orderNumber: {
       fontSize: '16px',
       fontWeight: '700',
-      color: '#1F2937',
+      color: '#FFD700',
     },
     badge: {
       padding: '4px 12px',
@@ -265,7 +265,7 @@ const DriverDashboard = () => {
       gap: '10px',
       marginBottom: '8px',
       fontSize: '14px',
-      color: '#4B5563',
+      color: '#E5E7EB',
     },
     orderIcon: {
       marginTop: '2px',
@@ -280,8 +280,8 @@ const DriverDashboard = () => {
     spinner: {
       width: '40px',
       height: '40px',
-      border: '3px solid #E5E7EB',
-      borderTopColor: '#6366F1',
+      border: '3px solid rgba(255, 215, 0, 0.2)',
+      borderTopColor: '#FFD700',
       borderRadius: '50%',
       animation: 'spin 1s linear infinite',
     },
